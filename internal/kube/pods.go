@@ -6,7 +6,8 @@ import (
 	"os"
 	"path/filepath"
 
-	// v1 "k8s.io/api/core/v1"
+
+	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/rest"
@@ -27,12 +28,8 @@ func getClientset() (*kubernetes.Clientset, error) {
 }
 
 func ListAllPodLabels() error {
-	clientset, err := getClientset()
-	if err != nil {
-		return err
-	}
 
-	pods, err := clientset.CoreV1().Pods("").List(context.TODO(), metav1.ListOptions{})
+	pods, err := GetAllPodsLabels()
 	if err != nil {
 		return err
 	}
@@ -44,6 +41,19 @@ func ListAllPodLabels() error {
 	}
 
 	return nil
+}
+
+func GetAllPodsLabels() (*corev1.PodList, error) {
+	clientset, err := getClientset()
+	if err != nil {
+		return nil, err
+	}
+
+	pods, err := clientset.CoreV1().Pods("").List(context.TODO(), metav1.ListOptions{})
+	if err != nil {
+		return nil, err
+	}
+	return pods, nil
 }
 
 func printLabels(labels map[string]string) {
