@@ -49,6 +49,8 @@ func main() {
 
 	http.HandleFunc("/", handler.HelloHandler)
 
+	http.HandleFunc("/pods", handler.PodsHandler(s))
+
 	log.Println("Starting serivce on port :8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 
