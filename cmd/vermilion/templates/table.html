@@ -1,0 +1,17 @@
+{{ define "table" }}
+<table>
+    <thead>
+        <tr>
+            <th>Version</th>
+            <th>Count</th>
+            <th>Percent</th>
+            <th>Pods</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{ range .Versions }}
+        {{ template "row" . }}
+        {{ end }}
+    </tbody>
+</table>
+{{ end }}

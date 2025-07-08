@@ -45,9 +45,11 @@ func main() {
 		fmt.Printf("%v", err)
 	}
 
-	fmt.Printf(string(jsonData)) 
+	fmt.Printf(string(jsonData))
 
-	http.HandleFunc("/", handler.HelloHandler)
+	http.HandleFunc("/", handler.VersionsHandler)
+
+	http.HandleFunc("/versions", handler.VersionsHandler)
 
 	http.HandleFunc("/pods", handler.PodsHandler(s))
 

@@ -1,0 +1,14 @@
+{{ define "row" }}
+<tr>
+    <td>{{.Version}}</td>
+    <td>{{len .Pods}}</td>
+    <td>{{printf "%.1f" .Percent}}%</td>
+    <td>
+        <ul>
+            {{ range .Pods }}
+            <li>{{.}}</li>
+            {{ end }}
+        </ul>
+    </td>
+</tr>
+{{ end }}

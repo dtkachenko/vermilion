@@ -1,0 +1,11 @@
+{{ define "content" }}
+<h1>Pod Version Dashboard</h1>
+
+<form hx-get="/pods" hx-target="#result" hx-trigger="change delay:300ms, submit">
+    <label>Namespace: <input name="namespace" value="{{.Namespace}}"></label>
+</form>
+
+<div id="result">
+    {{ template "table" . }}
+</div>
+{{ end }}
